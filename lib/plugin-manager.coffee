@@ -34,23 +34,7 @@ class PluginManager
           console.log("Could not go to definition")
 
   check: ->
-    return if @checkTurnedOff? and @checkTurnedOff
-    fileName = atom.workspace.getActiveTextEditor()?.getPath()
-    return unless fileName?
-
-    utilFlowCommand.check
-      fileName: fileName
-      onResult: (result) =>
-        # Massage results
-        errors = result.errors.map ((parts) ->
-          err = parts.message[0]
-          err.descr = parts.message.reduce ((acc, x) ->
-            acc + " " + x.descr
-          ), ""
-          err
-        )
-        @checkResults = errors #result.errors.reduce ((sofar, x) -> sofar.concat x.message), []
-        @updateAllEditorViewsWithResults()
+    return;
 
   # Update every editor view with results
   updateAllEditorViewsWithResults: ->
